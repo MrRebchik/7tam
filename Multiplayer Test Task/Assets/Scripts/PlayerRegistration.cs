@@ -9,9 +9,10 @@ public class PlayerRegistration : MonoBehaviour
     public string Name { get; private set; }
     [SerializeField] private TMP_InputField field;
     [SerializeField] private Image logIn;
-    [SerializeField] private LobbyManager script;
+    [SerializeField] private GameObject script;
     private void Start()
     {
+        logIn.gameObject.SetActive(true);
         Name = string.Empty;
     }
     public bool SetName()
@@ -30,7 +31,6 @@ public class PlayerRegistration : MonoBehaviour
         {
             logIn.gameObject.SetActive(false);
             script.gameObject.SetActive(true);
-
         }
     }
     
