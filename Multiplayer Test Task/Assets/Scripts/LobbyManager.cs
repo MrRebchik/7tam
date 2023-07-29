@@ -14,7 +14,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("менеджер запущен");
         PhotonNetwork.NickName = current.Name;
-        //PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.GameVersion = "1";
         PhotonNetwork.ConnectUsingSettings();
 
@@ -28,13 +27,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public override void OnCreatedRoom()
     {
-        //base.OnCreatedRoom();
         Debug.Log("создана комната с названием " + createRoom.text);
     }
     public override void OnConnectedToMaster()
     {
         Debug.Log("подключился к серверу");
-
     }
     public void JoinRoom()
     {
