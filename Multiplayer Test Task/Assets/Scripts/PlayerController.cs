@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,20 +6,33 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rigidbody;
-    [SerializeField] private FixedJoystick joystick;
-    [SerializeField] private Animator animator;
 
-    [SerializeField] private float moveSpeed;
+    private PhotonView photonView;
+    private Rigidbody2D rigidBody;
+    private GameObject _joystick;
+    private FixedJoystick joystick;
+    private Animator animator;
+
+    private float moveSpeed = 1.5f;
+    private void Start()
+    {
+        photonView = GetComponent<PhotonView>();
+        rigidBody = GetComponent<Rigidbody2D>();
+        _joystick = GameObject.FindGameObjectWithTag("Joystick");
+        joystick = _joystick.GetComponent<FixedJoystick>();
+        animator = GetComponent<Animator>();
+    }
+
 
     private void FixedUpdate()
     {
-        rigidbody.velocity = new Vector2(-joystick.Horizontal * moveSpeed, -joystick.Vertical * moveSpeed);
+        if (!photonView.IsMine) return;
+
+        rigidBody.velocity = new Vector2(-joystick.Horizontal * moveSpeed, -joystick.Vertical * moveSpeed);
 
         if (joystick.Horizontal != 0 || joystick.Vertical != 0)
         {
-            //transform.Rotate(new Vector3(0, 0, Mathf.Atan(rigidbody.velocity.y/ rigidbody.velocity.x)));
-            transform.rotation = Quaternion.LookRotation(Vector3.forward, rigidbody.velocity);
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, rigidBody.velocity);
             animator.SetBool("IsWalk", true);
             animator.SetBool("IsIdle", false);
         }

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3134492767410033525}
   - component: {fileID: 3134492767410033524}
   - component: {fileID: 4011165573708789869}
-  - component: {fileID: 2898065727460228284}
   - component: {fileID: 7703906105538976271}
+  - component: {fileID: 2898065727460228284}
   - component: {fileID: 2393573031250594514}
   - component: {fileID: 346927782608080328}
   - component: {fileID: 8358976326181066026}
@@ -111,22 +111,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2898065727460228284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3134492767410033515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 749b7aefa85406741b803fb490c9cb94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidbody: {fileID: 0}
-  joystick: {fileID: 0}
-  animator: {fileID: 0}
-  moveSpeed: 0
 --- !u!114 &7703906105538976271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +134,18 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &2898065727460228284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3134492767410033515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749b7aefa85406741b803fb490c9cb94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2393573031250594514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +161,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
-  m_UseLocal: 1
+  m_UseLocal: 0
 --- !u!50 &346927782608080328
 Rigidbody2D:
   serializedVersion: 4

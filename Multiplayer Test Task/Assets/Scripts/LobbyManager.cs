@@ -14,6 +14,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("менеджер запущен");
         PhotonNetwork.NickName = current.Name;
+        //PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.GameVersion = "1";
         PhotonNetwork.ConnectUsingSettings();
 
