@@ -4,26 +4,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-
+using UnityEngine.UIElements;
 
 public class GameConnectionManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject coin;
-    private float timeInterval = 4f;
+    [SerializeField] private GameObject endPupUp;
+    private float timeInterval = 6f;
     private float timeLeft;
+    private int aliveCount;
     private void Start()
     {
+
         timeLeft = timeInterval;
+
         Vector3 pos = new(Random.Range(-10f, 10f), Random.Range(-4f, 4f));
         PhotonNetwork.Instantiate(playerPrefab.name, pos, Quaternion.identity);
-        Debug.Log(coin.name);
-        Debug.Log(playerPrefab.name);
+
     }
+
     private void FixedUpdate()
     {
-        Debug.Log(coin.name);
         timeLeft -= Time.deltaTime;
         if (!PhotonNetwork.IsMasterClient) return;
         if(timeLeft <= 0) 
@@ -31,6 +33,10 @@ public class GameConnectionManager : MonoBehaviourPunCallbacks
             Vector3 pos = new(Random.Range(-10f, 10f), Random.Range(-4f, 4f));
             PhotonNetwork.Instantiate(coin.name, pos, Quaternion.identity);
             timeLeft = timeInterval;
+        }
+        if(aliveCount == 1)
+        {
+            endPupUp.gameObject.SetActive(true);
         }
     }
     public override void OnLeftRoom()

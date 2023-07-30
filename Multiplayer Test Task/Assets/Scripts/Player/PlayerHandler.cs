@@ -23,12 +23,17 @@ public class PlayerHandler : MonoBehaviour
     void FixedUpdate()
     {
         healthBar.transform.localScale = new Vector3((float)Health/100,1,1);
-        if (Health <= 0)
+        if (Health <= 0 && IsAlive)
         {
+            Dead();
             IsAlive = false;
             Health = 0;
         }
         moneyText.text = "Money:" + Money.ToString();
+    }
+    public void Dead()
+    {
+        PhotonNetwork.LeaveRoom();
     }
     public void Damage()
     {
@@ -37,6 +42,7 @@ public class PlayerHandler : MonoBehaviour
             Health -= 24;
         }
         else Health = 0;
+        
     }
     public void TakeCoin()
     {
