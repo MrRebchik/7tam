@@ -42,15 +42,16 @@ public class PlayerControls : MonoBehaviourPunCallbacks
 
     public void Fire()
     {
+        #region
         logic = GameObject.FindGameObjectWithTag("Logic");
         gameConnectionManager = logic.GetComponent<GameConnectionManager>();
         playerHandler = logic.GetComponent<PlayerHandler>();
         shotPoint = GameObject.Find("BulletSpawner");
-        Debug.Log(shotPoint.transform.rotation);
+        #endregion
+        if (!playerHandler.IsAlive) return;
         gameConnectionManager.Fire(
             bullet,
             shotPoint.transform.position,
-            //Quaternion.Euler(shotPoint.transform.rotation.x, shotPoint.transform.rotation.y, shotPoint.transform.rotation.z));
             shotPoint.transform.rotation);
     }
     private void FixedUpdate()
@@ -76,6 +77,18 @@ public class PlayerControls : MonoBehaviourPunCallbacks
         {
             animator.SetBool("IsIdle", true);
             animator.SetBool("IsWalk", false);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!photonView.IsMine) return;
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            playerHandler.Damage();
+        }
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            playerHandler.TakeCoin();
         }
     }
 }

@@ -1,13 +1,17 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHandler : MonoBehaviour
 {
-    [SerializeField] private int Health;
-    [SerializeField] private int Money;
     [SerializeField] public GameObject bulletPrefab;
+    [SerializeField] public Image healthBar;
+    [SerializeField] public TMP_Text moneyText;
+    public int Health { get; private set; }
+    public int Money { get; private set; }
     public bool IsAlive { get; private set; }
     void Start()
     {
@@ -18,21 +22,25 @@ public class PlayerHandler : MonoBehaviour
 
     void FixedUpdate()
     {
+        healthBar.transform.localScale = new Vector3((float)Health/100,1,1);
         if (Health <= 0)
         {
             IsAlive = false;
+            Health = 0;
         }
+        moneyText.text = "Money:" + Money.ToString();
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void Damage()
     {
-        if(collision.gameObject.CompareTag("Bullet"))
+        if(Health > 0)
         {
-            Health -= 26;
-            Debug.Log("урон");
+            Health -= 24;
         }
-        if(collision.gameObject.CompareTag("Coin"))
-        {
-            Money++;
-        }
+        else Health = 0;
     }
+    public void TakeCoin()
+    {
+        Money++;
+    }
+    
 }
