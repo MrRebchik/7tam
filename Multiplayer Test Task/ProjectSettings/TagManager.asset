@@ -8,6 +8,9 @@ TagManager:
   - Joystick
   - AtackButton
   - Canvas
+  - BulletSpawner
+  - Bullet
+  - Logic
   layers:
   - Default
   - TransparentFX

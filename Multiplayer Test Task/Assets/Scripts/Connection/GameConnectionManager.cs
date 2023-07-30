@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+//using static UnityEditor.PlayerSettings;
 
 public class GameConnectionManager : MonoBehaviourPunCallbacks
 {
@@ -15,7 +16,12 @@ public class GameConnectionManager : MonoBehaviourPunCallbacks
     }
     public override void OnLeftRoom()
     {
+        PlayerPrefs.SetInt("IsRegistered", (int)Session.Registered);
         SceneManager.LoadScene("Lobby");
+    }
+    public void Fire(GameObject g, Vector3 pos, Quaternion q)
+    {
+        PhotonNetwork.Instantiate(g.name,pos,q);
     }
     public void Leave()
     {
